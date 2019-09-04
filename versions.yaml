@@ -14,4 +14,25 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-# TBD
+_variables:
+  from: &from gcr.io/cloud-marketplace-ops/php7-apache:7.3-debian9
+  joomla: &joomla
+    version: '3.9.11'
+    sha512: 'f3676dc54a609d4f064b6ed8945c4ffdb6a17664d17e2dc919c21783ae9db4a7dc619ae3a7728f62e25c9ac926a8eba4f076e500cd5744c82d25fdcdb41784df'
+  tags: &tags
+  - '3.9.11-debian9'
+  - '3.9.11'
+  - '3.9'
+  - '3'
+  - 'latest'
+
+versions:
+
+  # Joomla! 3 with PHP 7.3-apache on Debian 9
+  - dir: '3/php7/debian9/apache'
+    repo: 'joomla3-php7-apache'
+    templateSubDir: debian9
+    tags: *tags
+    from: *from
+    packages:
+      joomla: *joomla
