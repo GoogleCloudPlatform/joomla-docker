@@ -1,4 +1,20 @@
 #!/bin/bash
+#
+# Copyright (C) 2019 Google LLC.
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along
+# with this program; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 set -ex
 
@@ -50,6 +66,8 @@ if ! [[ -e index.php && -e libraries/cms/version/version.php || -e libraries/src
                 # NOTE: The "Indexes" option is disabled in the php:apache base image
                 #       so remove it as we enable .htaccess
                 sed -r 's/^(Options -Indexes.*)$/#\1/' htaccess.txt > .htaccess
+                # Disable redirect from server-status
+                sed -i '/RewriteCond %{REQUEST_FILENAME} !-f/i RewriteCond %{REQUEST_URI} !=/server-status' .htaccess
                 chown www-data:www-data .htaccess
         fi
 
