@@ -51,6 +51,16 @@ if [[ -z ${JOOMLA_DB_PASSWORD} ]]; then
   exit 1
 fi
 
+if [[ ${AUTO_INSTALL} = 'yes' ]]; then
+  if [[ -z ${JOOMLA_PASSWORD} ]]; then
+    echo >&2 "error: AUTO_INSTALL=yes required JOOMLA_PASSWORD environment variable"
+    echo >&2 "  Did you forget to -e JOOMLA_PASSWORD=... ?"
+    echo >&2
+    echo >&2 "  (Also of interest might be JOOMLA_USER_NAME and JOOMLA_USER_EMAIL.)"
+    exit 1
+  fi
+fi
+
 if ! [[ -e index.php && -e libraries/cms/version/version.php || -e libraries/src/Version.php ]]; then
   echo >&2 "Joomla not found in $(pwd) - copying now..."
 
@@ -75,15 +85,63 @@ if ! [[ -e index.php && -e libraries/cms/version/version.php || -e libraries/src
 fi
 
 # Ensure the MySQL Database is created
-php /makedb.php "$JOOMLA_DB_HOST" "$JOOMLA_DB_USER" "$JOOMLA_DB_PASSWORD" "$JOOMLA_DB_NAME"
+php /makedb.php "${JOOMLA_DB_HOST}" "${JOOMLA_DB_USER}" "${JOOMLA_DB_PASSWORD}" "${JOOMLA_DB_NAME}"
 
-echo >&2 "========================================================================"
-echo >&2
-echo >&2 "This server is now configured to run Joomla!"
-echo >&2
-echo >&2 "NOTE: You will need your database server address, database name,"
-echo >&2 "and database user credentials to install Joomla."
-echo >&2
-echo >&2 "========================================================================"
+if [[ ${AUTO_INSTALL} = 'yes' ]]; then
+  : ${JOOMLA_USER_NAME:='admin'}
+  : ${JOOMLA_USER_EMAIL:='admin@example.com'}
+  JOOMLA_USER_ID=$(cat /dev/urandom | tr -dc '1-9' | fold -w 2 | head -n 1)
+  DBPREFIX=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 5 | head -n 1)_
+
+  sed -i "s/\$user = ''/\$user = '${JOOMLA_DB_USER}'/" installation/configuration.php-dist
+  sed -i "s/\$password = ''/\$password = '${JOOMLA_DB_PASSWORD}'/" installation/configuration.php-dist
+  sed -i "s/\$db = ''/\$db = '${JOOMLA_DB_NAME}'/" installation/configuration.php-dist
+  sed -i "s/\$host = 'localhost'/\$host = '${JOOMLA_DB_HOST}'/" installation/configuration.php-dist
+  sed -i "s/\$dbprefix = 'jos_'/\$dbprefix = '${DBPREFIX}'/" installation/configuration.php-dist
+  sed -i "s/\$log_path = '\/var\/logs'/\$log_path = '\/var\/www\/html\/administrator\/logs'/" installation/configuration.php-dist
+  cp installation/configuration.php-dist configuration.php
+
+  # To prevent DB disruption, during the installation Joomla! creates new tables with a random prefix.
+  # In the joomla.sql #__ means the prefix.
+  sed -i "s/#__/${DBPREFIX}/" installation/sql/mysql/joomla.sql
+  cat installation/sql/mysql/joomla.sql | \
+    mysql -h ${JOOMLA_DB_HOST} -u ${JOOMLA_DB_USER} --password=${JOOMLA_DB_PASSWORD} ${JOOMLA_DB_NAME}
+  # create joomla user
+  JOOMLA_ENC_PASS="$(echo -n "${JOOMLA_PASSWORD}" | md5sum | awk '{ print $1 }' )"
+  echo "INSERT INTO \`${DBPREFIX}users\` \
+    (\`id\`, \`name\`, \`username\`, \`email\`, \`password\`, \
+    \`block\`, \`sendEmail\`, \`registerDate\`, \`lastvisitDate\`, \
+    \`activation\`, \`params\`, \`lastResetTime\`, \`resetCount\`, \
+    \`otpKey\`, \`otep\`, \`requireReset\`) VALUES ('${JOOMLA_USER_ID}', \
+    '${JOOMLA_USER_NAME}', '${JOOMLA_USER_NAME}', '${JOOMLA_USER_EMAIL}', \
+    '${JOOMLA_ENC_PASS}', '0', '0', '$(date +%Y-%m-%d)', '$(date +%Y-%m-%d)', \
+    '', '', '$(date +%Y-%m-%d)', '0', '', '', '0');" | \
+    mysql -h ${JOOMLA_DB_HOST} -u ${JOOMLA_DB_USER} \
+    --password=${JOOMLA_DB_PASSWORD} ${JOOMLA_DB_NAME}
+  echo "INSERT INTO \`${DBPREFIX}user_usergroup_map\` \
+    (\`user_id\`, \`group_id\`) VALUES ('${JOOMLA_USER_ID}', '8');" | \
+    mysql -h ${JOOMLA_DB_HOST} -u ${JOOMLA_DB_USER} \
+    --password=${JOOMLA_DB_PASSWORD} ${JOOMLA_DB_NAME}
+
+  rm -rf installation/
+  echo >&2 "========================================================================"
+  echo >&2
+  echo >&2 "Joomla! has been configured!"
+  echo >&2
+  echo >&2 "For the administrative access please use the following:"
+  echo >&2 "Username: ${JOOMLA_USER_NAME}"
+  echo >&2 "Password: ${JOOMLA_PASSWORD}"
+  echo >&2
+  echo >&2 "========================================================================"
+else
+  echo >&2 "========================================================================"
+  echo >&2
+  echo >&2 "This server is now configured to run Joomla!"
+  echo >&2
+  echo >&2 "NOTE: You will need your database server address, database name,"
+  echo >&2 "and database user credentials to install Joomla."
+  echo >&2
+  echo >&2 "========================================================================"
+fi
 
 exec "$@"

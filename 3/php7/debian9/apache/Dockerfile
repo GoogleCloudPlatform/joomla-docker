@@ -63,6 +63,11 @@ RUN { \
   } > /usr/local/etc/php/conf.d/opcache-recommended.ini
 RUN a2enmod rewrite expires
 
+RUN set -ex ;\
+  apt-get update ;\
+  apt-get install -y mariadb-client \
+  && rm -rf /var/lib/apt/lists/*
+
 VOLUME /var/www/html
 
 ENV JOOMLA_VERSION 3.9.11
