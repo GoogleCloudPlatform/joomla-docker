@@ -16,8 +16,15 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-set -ex
+set -e
 
+# Enable bash debug if DEBUG_DOCKER_ENTERYPOINT exists
+if [[ "${DEBUG_DOCKER_ENTRYPOINT}" = "true" ]]; then
+    echo "!!! WARNING: DEBUG_DOCKER_ENTRYPOINT is enabled!"
+    echo "!!! WARNING: Use only for debugging. Do not use in production!"
+    set -x
+    env
+fi
 
 if [[ -n ${MYSQL_PORT_3306_TCP} ]]; then
   if [[ -z ${JOOMLA_DB_HOST} ]]; then
