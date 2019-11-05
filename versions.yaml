@@ -22,7 +22,9 @@ _variables:
   tags: &tags
   - '3.9.11-debian9'
   - '3.9.11'
+  - '3.9-debian9'
   - '3.9'
+  - '3-debian9'
   - '3'
   - 'latest'
 
