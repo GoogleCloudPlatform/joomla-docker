@@ -17,11 +17,11 @@
 _variables:
   from: &from gcr.io/cloud-marketplace-ops/php7-apache:7.3-debian9
   joomla: &joomla
-    version: '3.9.11'
-    sha512: 'f3676dc54a609d4f064b6ed8945c4ffdb6a17664d17e2dc919c21783ae9db4a7dc619ae3a7728f62e25c9ac926a8eba4f076e500cd5744c82d25fdcdb41784df'
+    version: '3.9.13'
+    sha512: '366101203f24a19464d3c86472dd937bb4c192b2621f1245f8907a3c5565594417baa79a19002eda84ac939b92376501a5300dc35a64c0c06df163d2e460550f'
   tags: &tags
-  - '3.9.11-debian9'
-  - '3.9.11'
+  - '3.9.13-debian9'
+  - '3.9.13'
   - '3.9-debian9'
   - '3.9'
   - '3-debian9'
