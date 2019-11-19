@@ -73,6 +73,7 @@ RUN set -ex ;\
 VOLUME /var/www/html
 
 ENV JOOMLA_VERSION {{ $joomla.Version }}
+ENV C2D_RELEASE {{ $joomla.Version }}
 ENV JOOMLA_SHA512 {{ $joomla.Sha512 }}
 
 # Download package and extract to web volume
