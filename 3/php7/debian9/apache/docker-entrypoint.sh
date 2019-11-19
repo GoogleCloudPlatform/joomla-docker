@@ -104,8 +104,9 @@ if ! [[ -e index.php && -e libraries/cms/version/version.php || -e libraries/src
     sed -i "s/\$db = ''/\$db = '${JOOMLA_DB_NAME}'/" installation/configuration.php-dist
     sed -i "s/\$host = 'localhost'/\$host = '${JOOMLA_DB_HOST}'/" installation/configuration.php-dist
     sed -i "s/\$dbprefix = 'jos_'/\$dbprefix = '${DBPREFIX}'/" installation/configuration.php-dist
-    sed -i "s/\$log_path = '\/var\/logs'/\$log_path = '\/var\/www\/html\/administrator\/logs'/" installation/configuration.php-dist
+    sed -i "s/\$log_path = '\/administrator\/logs'/\$log_path = '\/var\/www\/html\/administrator\/logs'/" installation/configuration.php-dist
     cp installation/configuration.php-dist configuration.php
+    chown www-data:www-data configuration.php
 
     # To prevent DB disruption, during the installation Joomla! creates new tables with a random prefix.
     # In the joomla.sql #__ means the prefix.
