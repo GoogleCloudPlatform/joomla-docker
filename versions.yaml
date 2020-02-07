@@ -1,4 +1,4 @@
-# Copyright 2019 Google LLC
+# Copyright 2020 Google LLC
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -14,27 +14,23 @@
 # with this program; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-_variables:
-  from: &from gcr.io/cloud-marketplace-ops/php7-apache:7.3-debian9
-  joomla: &joomla
-    version: '3.9.14'
-    sha512: 'e7807256f40330fa857d37bd00b91e76c7a0ee24d21a1c3fbe95af90cf80b01fcee15845b9cbdc75a3eec0e36b140e87d78fbe491ee6851abbc74be621cb719a'
-  tags: &tags
-  - '3.9.14-debian9'
-  - '3.9.14'
-  - '3.9-debian9'
-  - '3.9'
-  - '3-debian9'
-  - '3'
-  - 'latest'
 
+cloudbuild:
+  enable_parallel: false
 versions:
+- dir: 3/php7/debian9/apache
+  from: gcr.io/cloud-marketplace-ops/php7-apache:7.3-debian9
+  packages:
+    joomla:
+      sha512: d68e32de6cfe9af92ff7f7991c9253a4487832e55e32e6f74f2b4d592a4777f3b4d8bd74dcd0b10d4262c5e39bdad1e9f7698dedb2ef2989dbc06aa7ab2f6c69
+      version: 3.9.15
+  repo: joomla3-php7-apache
+  tags:
+  - 3.9.15-debian9
+  - 3.9-debian9
+  - 3-debian9
+  - 3.9.15
+  - '3.9'
+  - '3'
+  - latest
 
-  # Joomla! 3 with PHP 7.3-apache on Debian 9
-  - dir: '3/php7/debian9/apache'
-    repo: 'joomla3-php7-apache'
-    templateSubDir: debian9
-    tags: *tags
-    from: *from
-    packages:
-      joomla: *joomla
