@@ -19,7 +19,7 @@ cloudbuild:
   enable_parallel: false
 versions:
 - dir: 3/php7/debian9/apache
-  from: gcr.io/cloud-marketplace-ops/php7-apache:7.3-debian9
+  from: marketplace.gcr.io/google/php7-apache2:7.3
   packages:
     joomla:
       sha512: 1bf4590a761cc24f59fc0d5b07ffbb8f9e50073b3536edc261b8785ff168aca2066d133a81c4ac33bcfe7b843559320ef4d1f97c5eb16096ca4b550a18b7f44d
