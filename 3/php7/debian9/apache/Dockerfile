@@ -1,4 +1,4 @@
-FROM marketplace.gcr.io/google/php7-apache2:7.3
+FROM gcr.io/cloud-marketplace-ops/php7-apache:7.3-debian9
 
 RUN set -ex; \
   savedAptMark="$(apt-mark showmanual)"; \
@@ -70,9 +70,9 @@ RUN set -ex ;\
 
 VOLUME /var/www/html
 
-ENV JOOMLA_VERSION 3.9.16
-ENV C2D_RELEASE 3.9.16
-ENV JOOMLA_SHA512 3266ff375631fd0c4c45c66368f3d07cdc1b41010ffad907a957e6c1acb511847bf2c112e0991792f84455b48bea95c84eca9a7325baa3cab61078fda697ed0f
+ENV JOOMLA_VERSION 3.9.18
+ENV C2D_RELEASE 3.9.18
+ENV JOOMLA_SHA512 1bf4590a761cc24f59fc0d5b07ffbb8f9e50073b3536edc261b8785ff168aca2066d133a81c4ac33bcfe7b843559320ef4d1f97c5eb16096ca4b550a18b7f44d
 
 # Download package and extract to web volume
 RUN set -ex; \
