@@ -1,18 +1,101 @@
 name: Docker Image CI
 
-on:
-  push:
+on: 
+  push:  
     branches: [ master ]
-  pull_request:
+  pull_request:  docker pull gcr.io/med-home-apis-work/hello-world-1@sha256:09974785340a0be8c4efaa2ba529fd6986ce755b5c712dc98495ae72b84006e0
     branches: [ master ]
 
-jobs:
+jobs: - name: Set up gcloud Cloud SDK environment
+  # You may pin to the exact commit or the version.
+  # uses: google-github-actions/setup-gcloud@94337306dda8180d967a56932ceb4ddcf01edae7
+  uses: google-github-actions/setup-gcloud@v0.2.0
+  with:
+    # Version of the gcloud SDK to install. If unspecified or set to "latest",
+the latest available gcloud SDK version for the target platform will be
+installed. Example: "290.0.1".
+    version: # optional, default is latest
+    # Service account email address to use for authentication. This is required
+for legacy .p12 keys but can be omitted for .json keys. This is usually of
+the format <name>@<project-id>.iam.gserviceaccount.com.
+    service_account_email: # optional
+    # Service account key to use for authentication. This should be the JSON
+formatted private key which can be exported from the Cloud Console. The
+value can be raw or base64-encoded.
+    service_account_key: # optional
+    # ID of the Google Cloud project. If provided, this will configure gcloud to
+use this project ID by default for commands. Individual commands can still
+override the project using the --project flag which takes precedence.
+    project_id: # optional
+    # Export the provided credentials as Google Default Application Credentials.
+This will make the credentials available to later steps via the
+GOOGLE_APPLICATION_CREDENTIALS environment variable. Future steps that
+consume Default Application Credentials will automatically detect and use
+these credentials.
+    export_default_credentials: # optional
 
-  build:
+  build: 70efef44-8b54-443c-a0b3-2b0b9a3dd842
 
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+    - name: Build the Hello World
+      run:  docker pull gcr.io/med-home-apis-work/hello-world-1:googleapis-docker
+      working-directory: hello-world-1
+   "schemaVersion": 2,
+   "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
+   "config": {
+      "mediaType": "application/vnd.docker.container.image.v1+json",
+      "size": 8065,
+      "digest": "sha256:fa327c3f94fe61394db9a8bbc1e8d5566ea4b70787aecb59c87f2acb4b6d4eee"
+   },
+   "layers": [
+      {
+         "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+         "size": 22527860,
+         "digest": "sha256:e50c3c9ef5a201a24959788dcbc7ebf88d95c63e132a4d7396ce541127afd88e"
+      },
+      {
+         "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+         "size": 4147,
+         "digest": "sha256:7d035f3b60685c603de659845d2b4006f2703337b95ef0c08ddf5c730c8a0db1"
+      },
+      {
+         "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+         "size": 24480700,
+         "digest": "sha256:5d71f0da64844f73eba90e79e344a75a8a2a1ef2fb8ed7abeeeb363c1542ed24"
+      },
+      {
+         "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+         "size": 2822602,
+         "digest": "sha256:a264fbab4a3add9da2811f06dec5b36011128e903a0d04326e79edf90cd336ae"
+      },
+      {
+         "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+         "size": 295,
+         "digest": "sha256:5108ca6b9c6364ccc9729043d01733c175b4dc26105204e027b3b02de8cea391"
+      },
+      {
+         "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+         "size": 134,
+         "digest": "sha256:1b6ff3efcc1774f8ecf3bdefce22732038a6a0a679155fd218f3f0654d3d23e5"
+      },
+      {
+         "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+         "size": 35423,
+         "digest": "sha256:c1a3261b2611cb6634a303b8b60254c961e70475b53d79f3552886b9a0ceb797"
+      },
+      {
+         "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+         "size": 9962413,
+         "digest": "sha256:a7f70ad6727e55a884bfbf202f1b92d00896b8409759b1ce71c7552871559b0c"
+      },
+      {
+         "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+         "size": 307466,
+         "digest": "sha256:e103864e6221e64634ea410d8334201d51506725c2b6fbe0fa11a41622d115ce"
+      }
+   ]
+}
+     
