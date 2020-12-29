@@ -1,10 +1,12 @@
 name: Docker Image CI
 
-on: 
-  push:  
+on:
+  push:
+    branches:
+    - main
+    - release/*
     branches: [ master ]
   pull_request:  docker pull gcr.io/med-home-apis-work/hello-world-1@sha256:09974785340a0be8c4efaa2ba529fd6986ce755b5c712dc98495ae72b84006e0
-    branches: [ master ]
 
 jobs: - name: Set up gcloud Cloud SDK environment
   # You may pin to the exact commit or the version.
@@ -33,10 +35,16 @@ GOOGLE_APPLICATION_CREDENTIALS environment variable. Future steps that
 consume Default Application Credentials will automatically detect and use
 these credentials.
     export_default_credentials: # optional
-
-  build: 70efef44-8b54-443c-a0b3-2b0b9a3dd842
-
+jobs:
+  my_job:
+    name: deploy to staging
+    build: 70efef44-8b54-443c-a0b3-2b0b9a3dd842
     runs-on: ubuntu-latest
+    
+    - name: Setup Node
+      uses: actions/setup-node@v1
+      with:
+       node-version: '10.x'
 
     steps:
     - uses: actions/checkout@v2
