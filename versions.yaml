@@ -22,14 +22,14 @@ versions:
   from: marketplace.gcr.io/google/php7-apache2:7.3
   packages:
     joomla:
-      sha512: df3d812451bb305f352e17c91656d4b3648af69243b2a870583555ea4c63ba35968902c281571ca017168034dcece9c826dbe737163630f713746aed9225a87a
-      version: 3.9.23
+      sha512: 0c34ea3334c613c3ae30f7ce60a808643a136920e108dcaad278d77cf3036a0ace92e30fb31f8ae9addcf6fc954655339d7abe9bc3de0b7f7032bf6429300888
+      version: 3.9.24
   repo: joomla3-php7-apache
   tags:
-  - 3.9.23-debian9
+  - 3.9.24-debian9
   - 3.9-debian9
   - 3-debian9
-  - 3.9.23
+  - 3.9.24
   - '3.9'
   - '3'
   - latest
