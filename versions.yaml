@@ -18,7 +18,7 @@
 cloudbuild:
   enable_parallel: false
 versions:
-- dir: 4/php7/debian9/apache/4/
+- dir: 4/php7/debian9/apache/4.0
   from: marketplace.gcr.io/google/php7-apache2:7.3
   packages:
     joomla:
@@ -33,7 +33,7 @@ versions:
   - '4.0'
   - '4'
   - latest
-- dir: 3/php7/debian9/apache/3.10/
+- dir: 3/php7/debian9/apache/3.10
   from: marketplace.gcr.io/google/php7-apache2:7.3
   packages:
     joomla:
@@ -48,7 +48,7 @@ versions:
   - '3.10'
   - '3'
   - latest
-- dir: 3/php7/debian9/apache/3.9/
+- dir: 3/php7/debian9/apache/3.9
   from: marketplace.gcr.io/google/php7-apache2:7.3
   packages:
     joomla:
