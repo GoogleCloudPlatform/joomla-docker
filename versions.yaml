@@ -33,6 +33,9 @@ versions:
   - '4.0'
   - '4'
   - latest
+  excludeTests:
+  - tests/functional_tests/auto_install_test.yaml
+  - tests/functional_tests/running_test.yaml
 - dir: 3/php7/debian9/apache/3.10
   from: marketplace.gcr.io/google/php7-apache2:7.3
   packages:
@@ -48,6 +51,8 @@ versions:
   - '3.10'
   - '3'
   - latest
+  excludeTests:
+  - tests/functional_tests/4.0_running_test.yaml
 - dir: 3/php7/debian9/apache/3.9
   from: marketplace.gcr.io/google/php7-apache2:7.3
   packages:
@@ -60,3 +65,6 @@ versions:
   - 3.9-debian9
   - 3.9.28
   - '3.9'
+  excludeTests:
+  - tests/functional_tests/4.0_running_test.yaml
+
