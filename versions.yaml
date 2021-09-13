@@ -25,7 +25,6 @@ versions:
       sha512: 2e97febcfa3689a22de030b668232d41a42e70100731991a4eba68434eaf7c9600c4db372072fe5baf59fafb699e394b59768398b513176ba0e9652f8a0419b4
       version: 4.0.2
   repo: joomla4-php7-apache
-  templateSubDir: 4.0
   tags:
   - 4.0.2-debian9
   - 4.0-debian9
@@ -41,7 +40,6 @@ versions:
       sha512: cf08194582bc7c88708200ecf664f6146e3244bca1e004deeb26c7459ebc3dab28da3b54d6f5e27bd3a12fe5defb3fe25266f4243f80e141f337a3d7a5e959fa
       version: 3.10.0
   repo: joomla3-php7-apache
-  templateSubDir: 3.0
   tags:
   - 3.10.0-debian9
   - 3.10-debian9
@@ -57,7 +55,6 @@ versions:
       sha512: 0751036475d9b527bd6da5f5a0c67e0c728449bf02ba9d508f206b4b2f35697093c938a4350b6e9412b16f5eabb8700575268b564fd8db451308ae4cfe4d882e
       version: 3.9.28
   repo: joomla3-php7-apache
-  templateSubDir: 3.0
   tags:
   - 3.9.28-debian9
   - 3.9-debian9
