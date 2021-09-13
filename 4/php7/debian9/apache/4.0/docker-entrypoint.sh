@@ -110,7 +110,11 @@ if ! [[ -e index.php && -e libraries/cms/version/version.php || -e libraries/src
 
     # To prevent DB disruption, during the installation Joomla! creates new tables with a random prefix.
     # In the joomla.sql #__ means the prefix.
-    for script in $(ls -l installation/sql/mysql/ | grep -v "total" | awk '{ print $9 }'); do
+    declare scripts="$(ls -l installation/sql/mysql/ \
+      | grep -v "total" \
+      | grep -v "sample" \
+      | awk '{ print $9 }')"
+    for script in $scripts; do
       sed -i "s/#__/${DBPREFIX}/" "installation/sql/mysql/${script}"
       cat "installation/sql/mysql/${script}" | \
         mysql -h ${JOOMLA_DB_HOST} -u ${JOOMLA_DB_USER} --password=${JOOMLA_DB_PASSWORD} ${JOOMLA_DB_NAME}
