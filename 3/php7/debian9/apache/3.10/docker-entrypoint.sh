@@ -109,10 +109,14 @@ if ! [[ -e index.php && -e libraries/cms/version/version.php || -e libraries/src
     chown www-data:www-data configuration.php
 
     # To prevent DB disruption, during the installation Joomla! creates new tables with a random prefix.
-    # In the joomla.sql #__ means the prefix.
-    sed -i "s/#__/${DBPREFIX}/" installation/sql/mysql/joomla.sql
-    cat installation/sql/mysql/joomla.sql | \
-      mysql -h ${JOOMLA_DB_HOST} -u ${JOOMLA_DB_USER} --password=${JOOMLA_DB_PASSWORD} ${JOOMLA_DB_NAME}
+    # In the joomla.sql #__ means the prefix. Ignores sample files
+    declare scripts="$(ls -1 -I "sample*" installation/sql/mysql/)"
+    for script in $scripts; do
+      sed -i "s/#__/${DBPREFIX}/" "installation/sql/mysql/${script}"
+      cat "installation/sql/mysql/${script}" | \
+        mysql -h ${JOOMLA_DB_HOST} -u ${JOOMLA_DB_USER} --password=${JOOMLA_DB_PASSWORD} ${JOOMLA_DB_NAME}
+    done
+
     # create joomla user
     JOOMLA_ENC_PASS="$(echo -n "${JOOMLA_PASSWORD}" | md5sum | awk '{ print $1 }' )"
     echo "INSERT INTO \`${DBPREFIX}users\` \

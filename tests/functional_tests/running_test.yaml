@@ -64,7 +64,7 @@ tests:
   command: [curl, -L, 'http://localhost']
   expect:
     stdout:
-      matches: 'Joomla! Web Installer'
+      matches: 'Joomla.*Installer'
 - name: Test Apache status
   command: [curl, -L, 'http://localhost/server-status']
   expect:

@@ -18,7 +18,37 @@
 cloudbuild:
   enable_parallel: false
 versions:
-- dir: 3/php7/debian9/apache
+- dir: 4/php7/debian9/apache/4.0
+  from: marketplace.gcr.io/google/php7-apache2:7.3
+  packages:
+    joomla:
+      sha512: 2e97febcfa3689a22de030b668232d41a42e70100731991a4eba68434eaf7c9600c4db372072fe5baf59fafb699e394b59768398b513176ba0e9652f8a0419b4
+      version: 4.0.2
+  repo: joomla4-php7-apache
+  tags:
+  - 4.0.2-debian9
+  - 4.0-debian9
+  - 4-debian9
+  - 4.0.2
+  - '4.0'
+  - '4'
+  - latest
+- dir: 3/php7/debian9/apache/3.10
+  from: marketplace.gcr.io/google/php7-apache2:7.3
+  packages:
+    joomla:
+      sha512: cf08194582bc7c88708200ecf664f6146e3244bca1e004deeb26c7459ebc3dab28da3b54d6f5e27bd3a12fe5defb3fe25266f4243f80e141f337a3d7a5e959fa
+      version: 3.10.0
+  repo: joomla3-php7-apache
+  tags:
+  - 3.10.0-debian9
+  - 3.10-debian9
+  - 3-debian9
+  - 3.10.0
+  - '3.10'
+  - '3'
+  - latest
+- dir: 3/php7/debian9/apache/3.9
   from: marketplace.gcr.io/google/php7-apache2:7.3
   packages:
     joomla:
@@ -28,9 +58,5 @@ versions:
   tags:
   - 3.9.28-debian9
   - 3.9-debian9
-  - 3-debian9
   - 3.9.28
   - '3.9'
-  - '3'
-  - latest
-
