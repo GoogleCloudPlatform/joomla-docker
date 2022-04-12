@@ -43,7 +43,7 @@ RUN set -ex; \
   ldd "$(php -r 'echo ini_get("extension_dir");')"/*.so \
     | awk '/=>/ { print $3 }' \
     | sort -u \
-    | xargs -r dpkg-query -S \
+    | xargs -r realpath | xargs -r dpkg-query --search \
     | cut -d: -f1 \
     | sort -u \
     | xargs -rt apt-mark manual; \
