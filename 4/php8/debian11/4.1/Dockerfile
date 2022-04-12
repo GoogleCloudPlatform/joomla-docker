@@ -1,4 +1,4 @@
-FROM marketplace.gcr.io/google/php7-apache2:7.3
+FROM marketplace.gcr.io/google/php8-apache2:8.0
 
 RUN set -ex; \
   savedAptMark="$(apt-mark showmanual)"; \
@@ -13,7 +13,7 @@ RUN set -ex; \
     libmemcached-dev \
   ; \
   \
-  docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr; \
+  docker-php-ext-configure gd --with-jpeg; \
   debMultiarch="$(dpkg-architecture --query DEB_BUILD_MULTIARCH)"; \
   docker-php-ext-install -j "$(nproc)" \
     bz2 \
@@ -27,9 +27,9 @@ RUN set -ex; \
     opcache \
   ; \
 # pecl will claim success even if one install fails, so we need to perform each install separately
-  pecl install APCu-5.1.17; \
-  pecl install memcached-3.1.3; \
-  pecl install redis-4.3.0; \
+  pecl install APCu-5.1.21; \
+  pecl install memcached-3.2.0; \
+  pecl install redis-5.3.7; \
   \
   docker-php-ext-enable \
     apcu \
@@ -43,7 +43,7 @@ RUN set -ex; \
   ldd "$(php -r 'echo ini_get("extension_dir");')"/*.so \
     | awk '/=>/ { print $3 }' \
     | sort -u \
-    | xargs -r dpkg-query -S \
+    | xargs -r realpath | xargs -r dpkg-query --search \
     | cut -d: -f1 \
     | sort -u \
     | xargs -rt apt-mark manual; \
