@@ -13,7 +13,7 @@ RUN set -ex; \
     libmemcached-dev \
   ; \
   \
-  docker-php-ext-configure gd --with-jpeg; \
+  docker-php-ext-configure gd --with-jpeg=/usr; \
   debMultiarch="$(dpkg-architecture --query DEB_BUILD_MULTIARCH)"; \
   docker-php-ext-install -j "$(nproc)" \
     bz2 \
