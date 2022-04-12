@@ -1,4 +1,4 @@
-FROM marketplace.gcr.io/google/php7-apache2:7.3
+FROM marketplace.gcr.io/google/php8-apache2:8.0
 
 RUN set -ex; \
   savedAptMark="$(apt-mark showmanual)"; \
@@ -13,7 +13,7 @@ RUN set -ex; \
     libmemcached-dev \
   ; \
   \
-  docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr; \
+  docker-php-ext-configure gd --with-jpeg=/usr; \
   debMultiarch="$(dpkg-architecture --query DEB_BUILD_MULTIARCH)"; \
   docker-php-ext-install -j "$(nproc)" \
     bz2 \
@@ -27,9 +27,9 @@ RUN set -ex; \
     opcache \
   ; \
 # pecl will claim success even if one install fails, so we need to perform each install separately
-  pecl install APCu-5.1.17; \
-  pecl install memcached-3.1.3; \
-  pecl install redis-4.3.0; \
+  pecl install APCu-5.1.21; \
+  pecl install memcached-3.2.0; \
+  pecl install redis-5.3.7; \
   \
   docker-php-ext-enable \
     apcu \
@@ -43,7 +43,7 @@ RUN set -ex; \
   ldd "$(php -r 'echo ini_get("extension_dir");')"/*.so \
     | awk '/=>/ { print $3 }' \
     | sort -u \
-    | xargs -r dpkg-query -S \
+    | xargs -r realpath | xargs -r dpkg-query --search \
     | cut -d: -f1 \
     | sort -u \
     | xargs -rt apt-mark manual; \
@@ -70,9 +70,9 @@ RUN set -ex ;\
 
 VOLUME /var/www/html
 
-ENV JOOMLA_VERSION 3.10.6
-ENV C2D_RELEASE 3.10.6
-ENV JOOMLA_SHA512 cd871290f83d6fd1a2e3fe077735e86554a1b3825e5d7e831df7aad56831ee6a958d77e92fa50c0cbbd240ed1158d4c1eadc8c1e968c990db5c89c4f5ee40a0a
+ENV JOOMLA_VERSION 4.1.0
+ENV C2D_RELEASE 4.1.0
+ENV JOOMLA_SHA512 44173170fb1598c465415cba919339c26624322621efed17c95fdffca7b62a1089863615e415f0ec36a6a4c4f5c746b7ec06dddd08929757f737e1a2a15ff714
 
 # Download package and extract to web volume
 RUN set -ex; \
