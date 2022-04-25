@@ -33,19 +33,4 @@ versions:
   - '4.1'
   - '4'
   - latest
-- dir: 3/php8/debian11/3.10
-  from: marketplace.gcr.io/google/php8-apache2:8.0
-  packages:
-    joomla:
-      sha512: 71b7d5956be38dcef33db3e777418d68b3ad157c53112f12e97f059f2749183ee7f81280d8b9fc72712dfe5565d17fa25af177c015611c569c90aa68bcdfd70a
-      version: 3.10.8
-  repo: joomla3-php8-apache
-  tags:
-  - 3.10.8-debian11
-  - 3.10-debian11
-  - 3-debian11
-  - 3.10.8
-  - '3.10'
-  - '3'
-  - latest
 
