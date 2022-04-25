@@ -1,4 +1,4 @@
-FROM marketplace.gcr.io/google/php8-apache2:8.0
+FROM marketplace.gcr.io/google/php7-apache2:7.3
 
 RUN set -ex; \
   savedAptMark="$(apt-mark showmanual)"; \
