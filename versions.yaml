@@ -22,14 +22,14 @@ versions:
   from: marketplace.gcr.io/google/php8-apache2:8.0
   packages:
     joomla:
-      sha512: 7937355529688adffe2d470bd49da89cddef1b10eca6e3ef20acfd2ebfb695fa3fa346352a68bc094787dd48fe9a2d06371038ce8894cf5ebb0197b3b6140bef
-      version: 4.1.3
+      sha512: 81edf13386640f358aec8d4facc4bda53bca401632d796a0b2137e5cdcb6635dc91d6abeb10e06545881a7a011dbe55ab8e07d670044cf563927467149f2cd2e
+      version: 4.1.5
   repo: joomla4-php8-apache
   tags:
-  - 4.1.3-debian11
+  - 4.1.5-debian11
   - 4.1-debian11
   - 4-debian11
-  - 4.1.3
+  - 4.1.5
   - '4.1'
   - '4'
   - latest
