@@ -65,7 +65,7 @@ RUN a2enmod rewrite expires
 
 RUN set -ex ;\
   apt-get update ;\
-  apt-get install -y mariadb-client \
+  apt-get install -y mariadb-client linux-libc-dev \
   && rm -rf /var/lib/apt/lists/*
 
 VOLUME /var/www/html
