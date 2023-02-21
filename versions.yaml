@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -22,14 +22,14 @@ versions:
   from: marketplace.gcr.io/google/php8-apache2:8.0
   packages:
     joomla:
-      sha512: 1e17002219287c60aa1091897506494ad3accdc860f713bbb575573679e7f2954b1034307f82ea49a41565e6ce7c91a29e87de7fc25f56cfb939dff55eacd5f8
-      version: 4.2.6
+      sha512: 364edac2a152a7c1c15171cad196e18b1b28a726aa66aaa888e203c2f444368f731103a05b705211c7a893d6068aeeb68ddfa1f57c52a5307985d3f4eb8bc4e9
+      version: 4.2.8
   repo: joomla4-php8-apache
   tags:
-  - 4.2.6-debian11
+  - 4.2.8-debian11
   - 4.2-debian11
   - 4-debian11
-  - 4.2.6
+  - 4.2.8
   - '4.2'
   - '4'
   - latest
