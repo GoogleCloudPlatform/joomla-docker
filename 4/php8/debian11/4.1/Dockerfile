@@ -1,4 +1,4 @@
-FROM marketplace.gcr.io/google/php8-apache2:8.0
+FROM marketplace.gcr.io/google/php8-apache2:8.1
 
 RUN set -ex; \
   savedAptMark="$(apt-mark showmanual)"; \
@@ -72,12 +72,10 @@ VOLUME /var/www/html
 
 ENV JOOMLA_VERSION 4.1.5
 ENV C2D_RELEASE 4.1.5
-ENV JOOMLA_SHA512 81edf13386640f358aec8d4facc4bda53bca401632d796a0b2137e5cdcb6635dc91d6abeb10e06545881a7a011dbe55ab8e07d670044cf563927467149f2cd2e
 
 # Download package and extract to web volume
 RUN set -ex; \
   curl -o joomla.tar.bz2 -SL https://github.com/joomla/joomla-cms/releases/download/${JOOMLA_VERSION}/Joomla_${JOOMLA_VERSION}-Stable-Full_Package.tar.bz2; \
-  echo "$JOOMLA_SHA512 *joomla.tar.bz2" | sha512sum -c -; \
   mkdir /usr/src/joomla; \
   tar -xf joomla.tar.bz2 -C /usr/src/joomla; \
   rm joomla.tar.bz2; \

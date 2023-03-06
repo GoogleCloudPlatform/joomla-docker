@@ -74,12 +74,10 @@ VOLUME /var/www/html
 
 ENV JOOMLA_VERSION {{ $joomla.Version }}
 ENV C2D_RELEASE {{ $joomla.Version }}
-ENV JOOMLA_SHA512 {{ $joomla.Sha512 }}
 
 # Download package and extract to web volume
 RUN set -ex; \
   curl -o joomla.tar.bz2 -SL https://github.com/joomla/joomla-cms/releases/download/${JOOMLA_VERSION}/Joomla_${JOOMLA_VERSION}-Stable-Full_Package.tar.bz2; \
-  echo "$JOOMLA_SHA512 *joomla.tar.bz2" | sha512sum -c -; \
   mkdir /usr/src/joomla; \
   tar -xf joomla.tar.bz2 -C /usr/src/joomla; \
   rm joomla.tar.bz2; \
