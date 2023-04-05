@@ -19,28 +19,18 @@ cloudbuild:
   enable_parallel: false
 versions:
 - dir: 4/php8/debian11/4.2
-  from: marketplace.gcr.io/google/php8-apache2:8.1
+  from: marketplace.gcr.io/google/php8-apache2:8.0
   packages:
     joomla:
-      version: 4.2.8
+      sha512: 25805241234753c05f562cf3be599c63cfcfb2e7dcf6b5b76b1cb4b6a4d305497c720eaccdc0939e4fceffa83099db9b3c44963fce86bafc3efc2fc34fecaa20
+      version: 4.2.9
   repo: joomla4-php8-apache
   tags:
-  - 4.2.8-debian11
+  - 4.2.9-debian11
   - 4.2-debian11
   - 4-debian11
-  - 4.2.8
+  - 4.2.9
   - '4.2'
   - '4'
   - latest
-- dir: 4/php8/debian11/4.1
-  from: marketplace.gcr.io/google/php8-apache2:8.1
-  packages:
-    joomla:
-      version: 4.1.5
-  repo: joomla4-php8-apache
-  tags:
-  - 4.1.5-debian11
-  - 4.1-debian11
-  - 4.1.5
-  - '4.1'
 
