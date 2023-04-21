@@ -1,4 +1,4 @@
-FROM marketplace.gcr.io/google/php8-apache2:8.1
+FROM marketplace.gcr.io/google/php8-apache2:8.0
 
 RUN set -ex; \
   savedAptMark="$(apt-mark showmanual)"; \
@@ -70,8 +70,8 @@ RUN set -ex ;\
 
 VOLUME /var/www/html
 
-ENV JOOMLA_VERSION 4.1.5
-ENV C2D_RELEASE 4.1.5
+ENV JOOMLA_VERSION 4.3.0
+ENV C2D_RELEASE 4.3.0
 
 # Download package and extract to web volume
 RUN set -ex; \
