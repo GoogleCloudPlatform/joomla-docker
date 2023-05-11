@@ -70,8 +70,8 @@ RUN set -ex ;\
 
 VOLUME /var/www/html
 
-ENV JOOMLA_VERSION 4.2.8
-ENV C2D_RELEASE 4.2.8
+ENV JOOMLA_VERSION 4.2.9
+ENV C2D_RELEASE 4.2.9
 
 # Download package and extract to web volume
 RUN set -ex; \
