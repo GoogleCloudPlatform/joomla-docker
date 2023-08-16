@@ -22,25 +22,14 @@ versions:
   from: marketplace.gcr.io/google/php8-apache2:8.1
   packages:
     joomla:
-      version: 4.3.1
+      version: 4.3.3
   repo: joomla4-php8-apache
   tags:
-  - 4.3.1-debian11
+  - 4.3.3-debian11
   - 4.3-debian11
   - 4-debian11
-  - 4.3.1
+  - 4.3.3
   - '4.3'
   - '4'
   - latest
-- dir: 4/php8/debian11/4.2
-  from: marketplace.gcr.io/google/php8-apache2:8.1
-  packages:
-    joomla:
-      version: 4.2.9
-  repo: joomla4-php8-apache
-  tags:
-  - 4.2.9-debian11
-  - 4.2-debian11
-  - 4.2.9
-  - '4.2'
 
