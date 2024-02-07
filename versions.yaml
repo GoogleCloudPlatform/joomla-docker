@@ -1,4 +1,4 @@
-# Copyright 2023 Google LLC
+# Copyright 2024 Google LLC
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -18,18 +18,18 @@
 cloudbuild:
   enable_parallel: false
 versions:
-- dir: 4/php8/debian11/4.3
+- dir: 4/php8/debian11/4.4
   from: marketplace.gcr.io/google/php8-apache2:8.1
   packages:
     joomla:
-      version: 4.3.4
+      version: 4.4.2
   repo: joomla4-php8-apache
   tags:
-  - 4.3.4-debian11
-  - 4.3-debian11
+  - 4.4.2-debian11
+  - 4.4-debian11
   - 4-debian11
-  - 4.3.4
-  - '4.3'
+  - 4.4.2
+  - '4.4'
   - '4'
   - latest
 
