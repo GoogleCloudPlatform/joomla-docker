@@ -10,6 +10,7 @@ RUN set -ex; \
     libbz2-dev \
     libpq-dev \
     libldap2-dev \
+    libexpat1 \
     libmemcached-dev \
   ; \
   \
