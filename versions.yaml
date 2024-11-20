@@ -16,6 +16,7 @@
 
 
 cloudbuild:
+  docker_image: gcr.io/cloud-builders/docker:24.0.9
   enable_parallel: false
 versions:
 - dir: 4/php8/debian12/4.4
@@ -24,6 +25,9 @@ versions:
     joomla:
       version: 4.4.8
   repo: joomla4-php8-apache
+  annotations:
+  - key: com.googleapis.cloudmarketplace.product.service.name
+    value: services/545638c3-744a-453a-9793-994aa18913a0.cloudpartnerservices.goog
   tags:
   - 4.4.8-debian12
   - 4.4-debian12
